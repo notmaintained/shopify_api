@@ -12,7 +12,9 @@ Simple [Shopify API](http://api.shopify.com/) client in PHP (currently only work
 
 ### Download
 
-#### Via [Composer](http://getcomposer.org/) (Preferred)
+#### Via [Composer](http://getcomposer.org/)
+
+This is the preferred method as it will also download dependencies.
 
 Create a `composer.json` file if you don't already have one in your projects root directory and require shopify_client:
 
@@ -47,6 +49,8 @@ Download the [latest version of shopify_client](https://github.com/sandeepshetty
 $ curl -L http://github.com/sandeepshetty/shopify_client/tarball/master | tar xvz
 $ mv sandeepshetty-shopify_client-* shopify_client
 ```
+Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), you'll have to download that manually as well.
+
 
 ### Require
 
