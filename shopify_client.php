@@ -115,7 +115,7 @@
 	}
 
 
-	function legacy_token_to_oauth_token($shops_token, $shared_secret, , $private_app)
+	function legacy_token_to_oauth_token($shops_token, $shared_secret, $private_app)
 	{
 		return $private_app ? $secret : md5($shared_secret.$shops_token);
 	}
