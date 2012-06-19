@@ -107,14 +107,14 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 <?php
 
 	// For regular apps:
-	$shopify = shopify_api_client($shops_myshopify_domain, $shops_access_token, $api_key, $shared_secret);
+	$shopify = shopify_client($shops_myshopify_domain, $shops_access_token, $api_key, $shared_secret);
 
 	// For private apps:
-	// $shopify = shopify_api_client($shops_myshopify_domain, NULL, $api_key, $password, true);
+	// $shopify = shopify_client($shops_myshopify_domain, NULL, $api_key, $password, true);
 
 	// If your migrating from legacy auth:
 	// $password = legacy_token_to_oauth_token($shops_legacy_token, $shared_secret);
-	// $shopify = shopify_api_client($shops_myshopify_domain, $password, $api_key, $shared_secret);
+	// $shopify = shopify_client($shops_myshopify_domain, $password, $api_key, $shared_secret);
 
 	try
 	{
