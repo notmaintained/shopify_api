@@ -108,6 +108,10 @@ $ mv sandeepshetty-shopify_client-* shopify_client
 	// For private apps:
 	// $shopify = shopify_api_client($shops_myshopify_domain, NULL, $api_key, $password, true);
 
+	// If your migrating from legacy auth:
+	// $passowrd = legacy_token_to_oauth_token($shops_legacy_token, $shared_secret);
+	// $shopify = shopify_api_client($shops_myshopify_domain, $passowrd, $api_key, $shared_secret);
+
 	try
 	{
 		// Get all products
