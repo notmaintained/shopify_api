@@ -37,27 +37,6 @@
 	}
 
 
-	function shopify_api($method, $url, $query='', $payload='', $request_headers=array(), &$response_headers=array())
-	{
-		try
-		{
-			$response = wcurl($method, $url, $query, $payload, $request_headers, $all_response_headers);
-		}
-		catch(WcurlException $e)
-		{
-			throw new ShopifyClientCurlException($e->getMessage(), $e->getCode());
-		}
-
-		$response = json_decode($response, true);
-		$response_headers = array_pop($all_response_headers);
-
-		if (isset($response['errors']) or ($response_headers['http_status_code'] >= 400))
-				throw new ShopifyClientApiException(compact('method', 'path', 'params', 'response_headers', 'response', 'shops_myshopify_domain', 'shops_token'));
-
-		return (is_array($response) and !empty($response)) ? array_shift($response) : $response;
-	}
-
-
 	function shopify_client($shop, $shops_token, $api_key, $shared_secret, $private_app=false)
 	{
 		$password = $shops_token;
@@ -76,6 +55,26 @@
 			return shopify_api($method, $url, $query, $payload, $request_headers, $response_headers);
 		};
 	}
+
+		function shopify_api($method, $url, $query='', $payload='', $request_headers=array(), &$response_headers=array())
+		{
+			try
+			{
+				$response = wcurl($method, $url, $query, $payload, $request_headers, $all_response_headers);
+			}
+			catch(WcurlException $e)
+			{
+				throw new ShopifyClientCurlException($e->getMessage(), $e->getCode());
+			}
+
+			$response = json_decode($response, true);
+			$response_headers = array_pop($all_response_headers);
+
+			if (isset($response['errors']) or ($response_headers['http_status_code'] >= 400))
+					throw new ShopifyClientApiException(compact('method', 'path', 'params', 'response_headers', 'response', 'shops_myshopify_domain', 'shops_token'));
+
+			return (is_array($response) and !empty($response)) ? array_shift($response) : $response;
+		}
 
 
 	function shopify_calls_made($response_headers)
