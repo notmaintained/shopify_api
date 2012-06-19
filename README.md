@@ -83,7 +83,7 @@ $ mv sandeepshetty-shopify_client-* shopify_client
 ```php
 <?php
 
-	$permission_url = permission_url($_GET['shop'], API_KEY, array('read_products'));
+	$permission_url = permission_url($_GET['shop'], $api_key, array('read_products', 'read_orders'));
 
 ?>
 ```
@@ -92,7 +92,7 @@ $ mv sandeepshetty-shopify_client-* shopify_client
 ```php
 <?php
 
-	$access_token = oauth_access_token($_GET['shop'], API_KEY, SHARED_SECRET, $_GET['code'])
+	$access_token = oauth_access_token($_GET['shop'], $api_key, $shared_secret, $_GET['code'])
 
 ?>
 ```
