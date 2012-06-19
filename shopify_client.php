@@ -58,22 +58,19 @@
 	}
 
 
-	function shopify_client($shop, $shops_token, $api_key, $secret, $private_app=false)
+	function shopify_client($shop, $shops_token, $api_key, $shared_secret, $private_app=false)
 	{
-		print_r(get_defined_vars());
-		//$password = $private_app ? $secret : md5($secret.$shops_token);
 		$password = $shops_token;
 		$baseurl = "https://$shop/";
-		//$baseurl = "https://$api_key:$password@$shops_myshopify_domain/";
 
-		return function ($method, $path, $params=array(), &$response_headers=array()) use ($baseurl, $password)
+		return function ($method, $path, $params=array(), &$response_headers=array()) use ($baseurl, $shops_token)
 		{
 			$url = $baseurl.ltrim($path, '/');
 			$query = in_array($method, array('GET','DELETE')) ? $params : array();
 			$payload = in_array($method, array('POST','PUT')) ? stripslashes(json_encode($params)) : array();
 
 			$request_headers = array();
-			array_push($request_headers, "X-Shopify-Access-Token: $password");
+			array_push($request_headers, "X-Shopify-Access-Token: $shops_token");
 			if (in_array($method, array('POST','PUT'))) array_push($request_headers, "Content-Type: application/json; charset=utf-8");
 
 			return shopify_api($method, $url, $query, $payload, $request_headers, $response_headers);
@@ -115,6 +112,18 @@
 		}
 
 		function getInfo() { $this->info; }
+	}
+
+
+	function legacy_token_to_oauth_token($shops_token, $shared_secret, , $private_app)
+	{
+		return $private_app ? $secret : md5($shared_secret.$shops_token);
+	}
+
+	function legacy_baseurl($shop, $api_key, $password)
+	{
+		return "https://$api_key:$password@$shop/";
+
 	}
 
 ?>
