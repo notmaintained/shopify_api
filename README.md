@@ -151,7 +151,7 @@ To learn more about Composer visit http://getcomposer.org/
 	}
 	catch (shopify_api\CurlException $e)
 	{
-		// $e->getMessage() returns value of curl_ error() and $e->getCode() returns value of curl_errno()
+		// $e->getMessage() returns value of curl_error() and $e->getCode() returns value of curl_errno()
 	}
 ?>
 ```
