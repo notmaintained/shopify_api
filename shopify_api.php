@@ -63,7 +63,7 @@
 		{
 			try
 			{
-				$response = wcurl($method, $url, $query, $payload, $request_headers, $all_response_headers);
+				$response = wcurl($method, $url, $query, $payload, $request_headers, $response_headers);
 			}
 			catch(WcurlException $e)
 			{
@@ -71,7 +71,6 @@
 			}
 
 			$response = json_decode($response, true);
-			$response_headers = array_pop($all_response_headers);
 
 			if (isset($response['errors']) or ($response_headers['http_status_code'] >= 400))
 					throw new ApiException(compact('method', 'path', 'params', 'response_headers', 'response', 'shops_myshopify_domain', 'shops_token'));
