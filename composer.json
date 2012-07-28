@@ -1,9 +1,9 @@
 {
-	"name": "sandeepshetty/shopify_client",
+	"name": "sandeepshetty/shopify_api",
 	"type": "library",
 	"description": "Simple Shopify API client in PHP",
 	"keywords": ["shopify","api"],
-	"homepage": "https://github.com/sandeepshetty/shopify_client",
+	"homepage": "https://github.com/sandeepshetty/shopify_api",
 	"license": "MIT",
 	"authors": [
 		{

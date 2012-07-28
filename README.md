@@ -1,6 +1,6 @@
-# shopify_client
+# shopify_api
 
-Simple [Shopify API](http://api.shopify.com/) client in PHP (currently only works with the new oAuth2 version)
+Simple [Shopify API](http://api.shopify.com/) client in PHP
 
 
 ## Requirements
@@ -10,18 +10,14 @@ Simple [Shopify API](http://api.shopify.com/) client in PHP (currently only work
 
 ## Getting Started
 
-### Download
+### Download via [Composer](http://getcomposer.org/)
 
-#### Via [Composer](http://getcomposer.org/)
-
-This is the preferred method as it will also download dependencies.
-
-Create a `composer.json` file if you don't already have one in your projects root directory and require shopify_client:
+Create a `composer.json` file if you don't already have one in your projects root directory and require shopify_api:
 
 ```
 {
 	"require": {
-		"sandeepshetty/shopify_client": "dev-master"
+		"sandeepshetty/shopify_api": "dev-master"
 	}
 }
 ```
@@ -36,28 +32,18 @@ Run the install command:
 $ php composer.phar install
 ```
 
-This will download shopify_client into the `vendor/sandeepshetty/shopify_client` directory.
+This will download shopify_api into the `vendor/sandeepshetty/shopify_api` directory.
 
 To learn more about Composer visit http://getcomposer.org/
 
 
-#### Via an archive
-
-Download the [latest version of shopify_client](https://github.com/sandeepshetty/shopify_client/archives/master):
-
-```shell
-$ curl -L http://github.com/sandeepshetty/shopify_client/tarball/master | tar xvz
-$ mv sandeepshetty-shopify_client-* shopify_client
-```
-Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), you'll have to download that manually as well.
-
-
-### Require
+### Require and use
 
 ```php
 <?php
 
-	require 'vendor/sandeepshetty/shopify_client/shopify_client.php';
+	require 'vendor/sandeepshetty/shopify_api/shopify_api.php';
+	use sandeepshetty\shopify_api;
 
 ?>
 ```
@@ -68,7 +54,7 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 ```php
 <?php
 
-	$install_url = install_url($shop_domain, $api_key);
+	$install_url = shopify_api\install_url($shop_domain, $api_key);
 ?>
 ```
 
@@ -76,7 +62,7 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 ```php
 <?php
 
-	if (is_valid_request($_GET, $shared_secret))
+	if (shopify_api\is_valid_request($_GET, $shared_secret))
 	{
 		...
 	}
@@ -87,7 +73,7 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 ```php
 <?php
 
-	$permission_url = permission_url($_GET['shop'], $api_key, array('read_products', 'read_orders'));
+	$permission_url = shopify_api\permission_url($_GET['shop'], $api_key, array('read_products', 'read_orders'));
 
 ?>
 ```
@@ -96,7 +82,7 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 ```php
 <?php
 
-	$access_token = oauth_access_token($_GET['shop'], $api_key, $shared_secret, $_GET['code'])
+	$access_token = shopify_api\oauth_access_token($_GET['shop'], $api_key, $shared_secret, $_GET['code'])
 
 ?>
 ```
@@ -107,14 +93,14 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 <?php
 
 	// For regular apps:
-	$shopify = shopify_client($shops_myshopify_domain, $shops_access_token, $api_key, $shared_secret);
+	$shopify = shopify_api\client($shops_myshopify_domain, $shops_access_token, $api_key, $shared_secret);
 
 	// For private apps:
-	// $shopify = shopify_client($shops_myshopify_domain, NULL, $api_key, $password, true);
+	// $shopify = shopify_api\client($shops_myshopify_domain, NULL, $api_key, $password, true);
 
 	// If your migrating from legacy auth:
-	// $password = legacy_token_to_oauth_token($shops_legacy_token, $shared_secret);
-	// $shopify = shopify_client($shops_myshopify_domain, $password, $api_key, $shared_secret);
+	// $password = shopify_api\legacy_token_to_oauth_token($shops_legacy_token, $shared_secret);
+	// $shopify = shopify_api\client($shops_myshopify_domain, $password, $api_key, $shared_secret);
 
 	try
 	{
@@ -140,18 +126,18 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 			$recurring_application_charge = $shopify('POST', '/admin/recurring_application_charges.json', $charge, $response_headers);
 
 			// API call limit helpers
-			echo shopify_calls_made($response_headers); // 2
-			echo shopify_calls_left($response_headers); // 298
-			echo shopify_call_limit($response_headers); // 300
+			echo shopify_api\calls_made($response_headers); // 2
+			echo shopify_api\calls_left($response_headers); // 298
+			echo shopify_api\call_limit($response_headers); // 300
 
 		}
-		catch (ShopifyClientApiException $e)
+		catch (shopify_api\Exception $e)
 		{
 			// If you're here, either HTTP status code was >= 400 or response contained the key 'errors'
 		}
 
 	}
-	catch (ShopifyClientApiException $e)
+	catch (shopify_api\Exception $e)
 	{
 		/* $e->getInfo() will return an array with keys:
 			* method
@@ -163,7 +149,7 @@ Since shopify_client requires [wcurl](https://github.com/sandeepshetty/wcurl), y
 			* shops_token
 		*/
 	}
-	catch (ShopifyClientCurlException $e)
+	catch (shopify_api\CurlException $e)
 	{
 		// $e->getMessage() returns value of curl_ error() and $e->getCode() returns value of curl_errno()
 	}
