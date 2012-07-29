@@ -1,0 +1,19 @@
+{
+    "hash": "edfd8f9f19f1e31a08158d61b8358afb",
+    "packages": [
+        {
+            "package": "sandeepshetty/wcurl",
+            "version": "dev-master",
+            "source-reference": "d21879ee52c5f63a0563fecf8c4abcecd4a21da2",
+            "commit-date": "1343500013"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "sandeepshetty/wcurl": 20
+    }
+}
