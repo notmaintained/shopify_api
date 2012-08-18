@@ -16,5 +16,8 @@
 	"require": {
 		"php": ">=5.3.0",
 		"sandeepshetty/wcurl": "dev-master"
+	},
+	"autoload": {
+		"files": ["vendor/sandeepshetty/wcurl/wcurl.php"]
 	}
 }

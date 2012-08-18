@@ -1,7 +1,7 @@
 <?php
 
 	namespace sandeepshetty\shopify_api;
-	require '../wcurl/wcurl.php';
+	require 'vendor/autoload.php';
 
 
 	function install_url($shop, $api_key)
