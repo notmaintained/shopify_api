@@ -16,6 +16,7 @@ Create a `composer.json` file if you don't already have one in your projects roo
 
 ```
 {
+	"minimum-stability": "dev",
 	"require": {
 		"sandeepshetty/shopify_api": "dev-master"
 	}
