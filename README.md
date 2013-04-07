@@ -43,7 +43,7 @@ To learn more about Composer visit http://getcomposer.org/
 ```php
 <?php
 
-	require 'vendor/sandeepshetty/shopify_api/client.php';
+	require 'vendor/autoload.php';
 	use sandeepshetty\shopify_api;
 
 ?>
