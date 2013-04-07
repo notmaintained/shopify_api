@@ -18,6 +18,6 @@
 		"sandeepshetty/wcurl": "dev-master"
 	},
 	"autoload": {
-		"files": ["client.php"]
+		"files": ["../wcurl/wcurl.php", "client.php"]
 	}
 }
