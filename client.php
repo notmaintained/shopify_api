@@ -40,10 +40,12 @@
 	}
 
 
-	function client($shop, $shops_token, $api_key, $shared_secret, $private_app=false)
+	function client($shop, $shops_token, $api_key, $shared_secret, $private_app = false)
 	{
 		$password = $shops_token;
-		$baseurl = "https://$shop/";
+		
+		// generate the base url
+		$baseurl = $private_app ? legacy_baseurl($shop, $api_key, $shared_secret) : "https://$shop/";
 
 		return function ($method, $path, $params=array(), &$response_headers=array()) use ($baseurl, $shops_token)
 		{
