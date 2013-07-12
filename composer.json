@@ -1,15 +1,21 @@
 {
-	"name": "sandeepshetty/shopify_api",
+	"name": "james-phpgenie/shopify_api",
 	"type": "library",
 	"description": "Simple Shopify API client in PHP",
 	"keywords": ["shopify","api"],
-	"homepage": "https://github.com/sandeepshetty/shopify_api",
+	"homepage": "https://github.com/james-phpgenie/shopify_api",
 	"license": "MIT",
 	"authors": [
 		{
 			"name": "Sandeep Shetty",
 			"email": "sandeep.shetty@gmail.com",
 			"homepage": "http://sandeep.shetty.in",
+			"role": "Developer"
+		},
+		{
+			"name": "James Pudney",
+			"email": "james@phpgenie.co.uk",
+			"homepage": "http://www.phpgenie.co.uk",
 			"role": "Developer"
 		}
 	],
