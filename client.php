@@ -119,7 +119,7 @@
 		{
 			if ( is_array($message) )
 			{
-				$message = implode("\n", $message);
+				$message = json_encode($message);
 			}
 			
 			parent::__construct($message, $code);
