@@ -115,7 +115,7 @@
 		 * @return void
 		 * @author James Pudney james@phpgenie.co.uk
 		 **/
-		public function __construct($message, $code)
+		public function __construct($message, $code = 0)
 		{
 			if ( is_array($message) )
 			{
