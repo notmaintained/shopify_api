@@ -1,8 +1,6 @@
 <?php
 
 	namespace sandeepshetty\shopify_api;
-	require 'vendor/autoload.php';
-
 
 	function install_url($shop, $api_key)
 	{
@@ -40,10 +38,12 @@
 	}
 
 
-	function client($shop, $shops_token, $api_key, $shared_secret, $private_app=false)
+	function client($shop, $shops_token, $api_key, $shared_secret, $private_app = false)
 	{
 		$password = $shops_token;
-		$baseurl = "https://$shop/";
+		
+		// generate the base url
+		$baseurl = $private_app ? legacy_baseurl($shop, $api_key, $shared_secret) : "https://$shop/";
 
 		return function ($method, $path, $params=array(), &$response_headers=array()) use ($baseurl, $shops_token)
 		{
@@ -105,6 +105,25 @@
 
 
 	class CurlException extends \Exception { }
+	class ApiException extends \Exception
+	{	
+		/**
+		 * Cosntructor
+		 *
+		 * @return void
+		 * @author James Pudney james@phpgenie.co.uk
+		 **/
+		public function __construct($message, $code = 0)
+		{
+			if ( is_array($message) )
+			{
+				$message = json_encode($message);
+			}
+			
+			parent::__construct($message, $code);
+		}
+	}
+	
 	class Exception extends \Exception
 	{
 		protected $info;
