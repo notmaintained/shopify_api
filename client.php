@@ -1,7 +1,6 @@
 <?php
 
 	namespace sandeepshetty\shopify_api;
-	require 'vendor/autoload.php';
 
 
 	function install_url($shop, $api_key)
